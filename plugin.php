@@ -6,10 +6,13 @@
  * Version: 1.0
  */
 
-use PixelPerfect\Factory;
-use PixelPerfect\Hooks;
+use PixelPerfect\Loader;
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/constants.php';
 
-( new Hooks() )->register_hooks();
+define( 'PP_PLUGIN_FILE', __FILE__ );
+define( 'PP_PLUGIN_DIR', __DIR__ );
+define( 'PP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+
+( new Loader() )->load();
