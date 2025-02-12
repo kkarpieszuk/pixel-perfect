@@ -1,0 +1,19 @@
+{
+    "name": "kkarpieszuk/pixel-perfect",
+    "description": "The tool for developer helping to stay pixel perfect with the design. Shows overlay with image on your page, slightly transparent.",
+    "type": "project",
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "Konrad Karpieszuk",
+            "email": "kkarpieszuk@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "PixelPerfect\\": "app/PixelPerfect"
+        }
+    }
+}
