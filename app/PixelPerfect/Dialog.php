@@ -54,95 +54,100 @@ class Dialog {
 
 		<script>
 		const element = document.getElementById('pixel-perfect-dialog');
-		let isDragging = false;
-		let currentX;
-		let currentY;
-		let initialX;
-		let initialY;
-		let xOffset = 0;
-		let yOffset = 0;
-
-		// set element image from data attribute.
-		element.style.backgroundImage = `url( ${element.dataset.image} )`;
-
-		// set element width and height from image dimensions.
 		const image = new Image();
-		image.src = element.dataset.image;
-		image.onload = function() {
-			element.style.width = `${image.width}px`;
-			element.style.height = `${image.height}px`;
-			element.style.left = `${(window.innerWidth - image.width) / 2}px`;
-			element.style.top = `${(window.innerHeight - image.height) / 2}px`;
-		};
 
-		// append dialog directly to body.
-		document.body.appendChild(element);
+		if ( image.complete ) {
+			let isDragging = false;
+			let currentX;
+			let currentY;
+			let initialX;
+			let initialY;
+			let xOffset = 0;
+			let yOffset = 0;
 
-		element.addEventListener('mousedown', dragStart);
-		document.addEventListener('mousemove', drag);
-		document.addEventListener('mouseup', dragEnd);
+			// set element image from data attribute.
+			element.style.backgroundImage = `url( ${element.dataset.image} )`;
 
-		element.addEventListener('click', function() {
-			this.focus();
-		});
+			image.src = element.dataset.image;
+			image.onload = function() {
+				element.style.width = `${image.width}px`;
+				element.style.height = `${image.height}px`;
+				element.style.left = `${(window.innerWidth - image.width) / 2}px`;
+				element.style.top = `${(window.innerHeight - image.height) / 2}px`;
+			};
 
-		document.addEventListener('keydown', function(e) {
-			if (!element.matches(':focus')) return;
+			// append dialog directly to body.
+			document.body.appendChild(element);
 
-			const moveAmount = e.shiftKey ? 100 : 1;
+			element.addEventListener('mousedown', dragStart);
+			document.addEventListener('mousemove', drag);
+			document.addEventListener('mouseup', dragEnd);
 
-			switch(e.key) {
-				case 'ArrowUp':
-					yOffset -= moveAmount;
-					break;
-				case 'ArrowDown':
-					yOffset += moveAmount;
-					break;
-				case 'ArrowLeft':
-					xOffset -= moveAmount;
-					break;
-				case 'ArrowRight':
-					xOffset += moveAmount;
-					break;
-				default:
-					return;
-			}
+			element.addEventListener('click', function() {
+				this.focus();
+			});
 
-			e.preventDefault();
-			setTranslate(xOffset, yOffset, element);
-		});
+			document.addEventListener('keydown', function(e) {
+				if (!element.matches(':focus')) return;
 
-		function dragStart(e) {
-			initialX = e.clientX - xOffset;
-			initialY = e.clientY - yOffset;
+				const moveAmount = e.shiftKey ? 100 : 1;
 
-			if (e.target === element) {
-				isDragging = true;
-			}
-		}
+				switch(e.key) {
+					case 'ArrowUp':
+						yOffset -= moveAmount;
+						break;
+					case 'ArrowDown':
+						yOffset += moveAmount;
+						break;
+					case 'ArrowLeft':
+						xOffset -= moveAmount;
+						break;
+					case 'ArrowRight':
+						xOffset += moveAmount;
+						break;
+					default:
+						return;
+				}
 
-		function drag(e) {
-			if (isDragging) {
 				e.preventDefault();
+				setTranslate(xOffset, yOffset, element);
+			});
 
-				currentX = e.clientX - initialX;
-				currentY = e.clientY - initialY;
+			function dragStart(e) {
+				initialX = e.clientX - xOffset;
+				initialY = e.clientY - yOffset;
 
-				xOffset = currentX;
-				yOffset = currentY;
-
-				setTranslate(currentX, currentY, element);
+				if (e.target === element) {
+					isDragging = true;
+				}
 			}
-		}
 
-		function dragEnd(e) {
-			initialX = currentX;
-			initialY = currentY;
-			isDragging = false;
-		}
+			function drag(e) {
+				if (isDragging) {
+					e.preventDefault();
 
-		function setTranslate(xPos, yPos, el) {
-			el.style.transform = `translate(${xPos}px, ${yPos}px)`;
+					currentX = e.clientX - initialX;
+					currentY = e.clientY - initialY;
+
+					xOffset = currentX;
+					yOffset = currentY;
+
+					setTranslate(currentX, currentY, element);
+				}
+			}
+
+			function dragEnd(e) {
+				initialX = currentX;
+				initialY = currentY;
+				isDragging = false;
+			}
+
+			function setTranslate(xPos, yPos, el) {
+				el.style.transform = `translate(${xPos}px, ${yPos}px)`;
+			}
+		} else {
+			// remove element.
+			element.parentNode.removeChild(element);
 		}
 	</script>
 		<?php
