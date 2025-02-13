@@ -1,0 +1,28 @@
+{
+  "name": "pixel-perfect-wordpress-plugin",
+  "version": "1.0.0",
+  "description": "The tool for developer helping to stay pixel perfect with the design. Shows overlay with image on your page, slightly transparent.",
+  "main": "assets/js/dialog.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kkarpieszuk/pixel-perfect.git"
+  },
+  "dependencies": {
+    "@kkarpieszuk/pixel-perfect-custom-element": "git+https://github.com/kkarpieszuk/pixel-perfect-custom-element.git"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "design",
+    "pixel-perfect"
+  ],
+  "author": "Konrad Karpieszuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kkarpieszuk/pixel-perfect/issues"
+  },
+  "homepage": "https://github.com/kkarpieszuk/pixel-perfect#readme"
+}

@@ -16,8 +16,6 @@ class Loader {
 	 */
 	public function load() {
 
-		$dialog = new Dialog();
-
-		$dialog->hooks();
+		( new Dialog() )->hooks();
 	}
 }
